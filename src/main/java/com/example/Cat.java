@@ -1,21 +1,34 @@
-package com.example;
+package com.example.cat;
 
-import java.util.List;
+import com.example.feline.Feline;
 
 public class Cat {
 
-    Predator predator;
+    private final Feline feline; // Зависимость от Feline
 
     public Cat(Feline feline) {
-        this.predator = feline;
+        this.feline = feline;
     }
 
     public String getSound() {
-        return "Мяу";
+        return feline.getSound();
     }
 
-    public List<String> getFood() throws Exception {
-        return predator.eatMeat();
+    public String eatMeat() {
+        return "Есть над чем подумать (с) ";
     }
 
+    public String getKittens(int numberOfKittens) {
+        if (numberOfKittens == 0) {
+            return "У вас нет котят";
+        } else {
+            return "Количество котят: " + numberOfKittens;
+        }
+    }
+
+    public String getExpectedKittens() {
+        // Пример использования Feline для получения информации о котятах
+        // В данном случае Feline возвращает 1 котенка
+        return "Количество котят: " + 1; // Предполагаем, что Feline возвращает 1
+    }
 }

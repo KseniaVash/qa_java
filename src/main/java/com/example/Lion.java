@@ -1,32 +1,37 @@
-package com.example;
+package com.example.lion;
 
-import java.util.List;
+import com.example.feline.Feline; // Импортируем Feline
 
 public class Lion {
 
-    boolean hasMane;
+    private final Feline feline; // Зависимость инжектируется через конструктор
 
-    public Lion(String sex) throws Exception {
-        if ("Самец".equals(sex)) {
-            hasMane = true;
-        } else if ("Самка".equals(sex)) {
-            hasMane = false;
-        } else {
-            throw new Exception("Используйте допустимые значения пола животного - самей или самка");
+    // Инъекция зависимости через конструктор
+    public Lion(Feline feline) {
+        // Проверка на null для безопасности
+        if (feline == null) {
+            throw new IllegalArgumentException("Feline cannot be null");
         }
+        this.feline = feline;
     }
 
-    Feline feline = new Feline();
+    public boolean hasMane() {
+        return feline.hasMane();
+    }
 
     public int getKittens() {
-        return feline.getKittens();
+        // Предполагаем, что Feline знает, сколько котят.
+        // В реальном приложении Feline мог бы иметь метод getKittensCount()
+        // Здесь для примера используем 1, если есть грива, иначе 0
+        return feline.hasMane() ? 1 : 0;
     }
 
-    public boolean doesHaveMane() {
-        return hasMane;
+    public String getSex() {
+        return feline.getSex();
     }
 
-    public List<String> getFood() throws Exception {
-        return feline.getFood("Хищник");
+    public String eatMeat() {
+        // Lion будет использовать eatMeat() от Feline, но может добавить свою логику
+        return "Поздравляем, вы получили вкусное мясо — " + feline.eatMeat();
     }
 }

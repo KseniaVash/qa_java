@@ -1,25 +1,34 @@
-package com.example;
+package com.example.feline;
 
-import java.util.List;
+public class Feline {
 
-public class Feline extends Animal implements Predator {
+    private final String sex;
+    private final boolean hasMane;
+    private final int age;
 
-    @Override
-    public List<String> eatMeat() throws Exception {
-        return getFood("Хищник");
+    public Feline(String sex, boolean hasMane, int age) {
+        this.sex = sex;
+        this.hasMane = hasMane;
+        this.age = age;
     }
 
-    @Override
-    public String getFamily() {
-        return "Кошачьи";
+    public String getSex() {
+        return sex;
     }
 
-    public int getKittens() {
-        return getKittens(1);
+    public boolean hasMane() {
+        return hasMane;
     }
 
-    public int getKittens(int kittensCount) {
-        return kittensCount;
+    public int getAge() {
+        return age;
     }
 
+    public String eatMeat() {
+        return "Накрыл(а) охотничий столик";
+    }
+
+    public String getSound() {
+        return "Мяу";
+    }
 }
