@@ -1,4 +1,4 @@
-package com.example.cat;
+package com.example;
 
 import com.example.feline.Feline;
 import org.junit.jupiter.api.Test;
@@ -11,16 +11,16 @@ import static org.mockito.Mockito.*;
 
 class CatTest {
 
-    // Мок зависимости Feline
+
     Feline mockFeline = mock(Feline.class);
-    Cat cat = new Cat(mockFeline); // Инъекция мока
+    com.example.cat.Cat cat = new com.example.cat.Cat(mockFeline); // Инъекция мока
 
     @Test
     void testCatGetSound() {
-        // Настраиваем поведение мока
+
         when(mockFeline.getSound()).thenReturn("Мяу-мяу");
         assertEquals("Мяу-мяу", cat.getSound(), "Звук кота должен быть 'Мяу-мяу'.");
-        // Проверяем, что метод getSound() у Feline был вызван
+
         verify(mockFeline).getSound();
     }
 
