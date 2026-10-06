@@ -3,16 +3,28 @@ package com.example.cat;
 import com.example.feline.Feline;
 
 public class Cat {
+    private final String name;
+    private final Feline feline;
 
-    private final Feline feline; // Зависимость от Feline
-
-    public Cat(Feline feline) {
+    public Cat(String name, Feline feline) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Имя кота не может быть пустым");
+        }
+        if (feline == null) {
+            throw new IllegalArgumentException("Feline не может быть null");
+        }
+        this.name = name;
         this.feline = feline;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getSound() {
         return feline.getSound();
     }
+
 
     public String eatMeat() {
         return "Есть над чем подумать (с) ";
@@ -27,8 +39,7 @@ public class Cat {
     }
 
     public String getExpectedKittens() {
-        // Пример использования Feline для получения информации о котятах
-        // В данном случае Feline возвращает 1 котенка
-        return "Количество котят: " + 1; // Предполагаем, что Feline возвращает 1
+
+        return "Количество котят: " + 1;
     }
 }
