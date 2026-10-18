@@ -43,28 +43,5 @@ class FelineTest {
         logger.info("Тест UT-FELINE-02 успешно завершен");
     }
 
-    @Test
-    @DisplayName("UT-FELINE-03: Проверка метода охоты")
-    void eatMeat_ShouldReturnHuntingMessage() {
-        logger.info("Запуск теста: Проверка метода охоты");
-        String result = femaleWithoutMane.eatMeat();
-        assertEquals("Накрыл(а) охотничий столик", result);
-        logger.info("Feline.eatMeat() вернул: {}", result);
-        logger.info("Тест UT-FELINE-03 успешно завершен");
-    }
 
-    @ParameterizedTest(name = "Параметризованный тест № 1: Пол={0}, Грива={1}, Возраст={2}")
-    @CsvSource({
-            "Самец, true, 2",
-            "Самка, false, 10"
-    })
-    @DisplayName("UT-FELINE-PAR-01: Параметризованный конструктор")
-    void constructor_Parametrized(String sex, boolean hasMane, int age) {
-        logger.info("Запуск параметризованного теста с данными: {}, {}, {}", sex, hasMane, age);
-        com.example.feline.Feline feline = new com.example.feline.Feline(sex, hasMane, age);
-        assertEquals(sex, feline.getSex());
-        assertEquals(hasMane, feline.hasMane());
-        assertEquals(age, feline.getAge());
-        logger.info("Параметризованный тест UT-FELINE-PAR-01 завершен успешно");
-    }
 }

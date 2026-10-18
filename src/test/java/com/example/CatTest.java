@@ -16,13 +16,13 @@ class CatTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CatTest.class);
     private Feline mockFeline;
-    private com.example.cat.Cat cat;
+    private com.example.Cat cat;
 
     @BeforeEach
     void setUp() {
         logger.info("=== [SETUP] Создание мока Feline и инъекция в Cat ===");
         mockFeline = Mockito.mock(Feline.class);
-        cat = new com.example.cat.Cat("Барсик", mockFeline);
+        cat = new com.example.Cat("Барсик", mockFeline);
     }
 
     @Test
