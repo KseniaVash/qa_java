@@ -1,4 +1,4 @@
-package com.example.lion;
+package com.example;
 
 import com.example.feline.Feline;
 import org.junit.jupiter.api.*;
@@ -17,13 +17,13 @@ class LionTest {
     private static final Logger logger = LoggerFactory.getLogger(LionTest.class);
 
     private Feline mockFeline;
-    private com.example.lion.Lion lion;
+    private com.example.Lion lion;
 
     @BeforeEach
     void setUp() {
         logger.info("=== [SETUP] Инициализация Lion для каждого теста ===");
         mockFeline = Mockito.mock(Feline.class);
-        lion = new com.example.lion.Lion(mockFeline, "Самец");
+        lion = new com.example.Lion(mockFeline, "Самец");
     }
 
     @Test
@@ -47,7 +47,7 @@ class LionTest {
     void testLionGetFood_Female() throws Exception {
         logger.info("Запуск теста: Логика питания для самки");
 
-        lion = new com.example.lion.Lion(mockFeline, "Самка");
+        lion = new com.example.Lion(mockFeline, "Самка");
         when(mockFeline.eatMeat()).thenReturn("Поздравляем, вы получили вкусное мясо — Сочная зебра");
 
         String food = lion.getFood();
@@ -63,7 +63,7 @@ class LionTest {
     void testLionGetFood_ParametrizedBySex(String sex) throws Exception {
         logger.info("Запуск параметризованного теста по полу: {}", sex);
 
-        lion = new com.example.lion.Lion(mockFeline, sex);
+        lion = new com.example.Lion(mockFeline, sex);
 
         when(mockFeline.eatMeat()).thenReturn("Поздравляем, вы получили вкусное мясо — Мясо добычи");
 
@@ -78,11 +78,11 @@ class LionTest {
     void testLionGetKittens() {
         logger.info("Запуск теста: Проверка количества котят");
 
-        lion = new com.example.lion.Lion(mockFeline, "Самец");
+        lion = new com.example.Lion(mockFeline, "Самец");
         when(mockFeline.hasMane()).thenReturn(true);
         assertEquals(1, lion.getKittens());
 
-        lion = new com.example.lion.Lion(mockFeline, "Самка");
+        lion = new com.example.Lion(mockFeline, "Самка");
         when(mockFeline.hasMane()).thenReturn(false);
         assertEquals(0, lion.getKittens());
 
@@ -94,7 +94,7 @@ class LionTest {
     void testLionConstructor_NullFeline() {
         logger.info("Запуск теста: Проверка инъекции зависимостей (null)");
         IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
-                () -> new com.example.lion.Lion(null, "Самец"));
+                () -> new com.example.Lion(null, "Самец"));
         assertTrue(ex.getMessage().contains("Feline cannot be null"));
         logger.info("Тест UT-LION-04 успешно завершен");
     }
@@ -103,7 +103,7 @@ class LionTest {
     @DisplayName("UT-LION-05: Проверка неизвестного пола")
     void testLionGetFood_UnknownSex() throws Exception {
         logger.info("Запуск теста: Проверка неизвестного пола");
-        lion = new com.example.lion.Lion(mockFeline, "Неизвестно");
+        lion = new com.example.Lion(mockFeline, "Неизвестно");
         Exception ex = assertThrows(IllegalArgumentException.class, lion::getFood);
         assertTrue(ex.getMessage().contains("Неизвестный пол"));
         logger.info("Тест UT-LION-05 успешно завершен");

@@ -1,4 +1,4 @@
-package com.example.lion;
+package com.example;
 
 import com.example.feline.Feline;
 
@@ -18,9 +18,6 @@ public class Lion {
         this.sex = sex;
     }
 
-    public String getSex() {
-        return sex;
-    }
 
     public boolean hasMane() {
 
@@ -31,10 +28,8 @@ public class Lion {
 
         return hasMane() ? 1 : 0;
     }
-
     public String getFood() throws Exception {
         if ("Самец".equals(sex)) {
-
             return feline.eatMeat();
         } else if ("Самка".equals(sex)) {
 
@@ -42,9 +37,5 @@ public class Lion {
         } else {
             throw new IllegalArgumentException("Неизвестный пол: " + sex);
         }
-    }
-
-    public String eatMeat() {
-        return "Поздравляем, вы получили вкусное мясо — " + feline.eatMeat();
     }
 }
