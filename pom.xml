@@ -121,8 +121,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-
-                    <!-- 3. Проверка на 100% покрытие -->
                     <execution>
                         <id>check</id>
                         <phase>verify</phase>
@@ -133,7 +131,6 @@
                             <rules>
                                 <rule>
                                     <element>CLASS</element>
-                                    <!-- Исключаем тестовые классы из проверки -->
                                     <excludes>
                                         <exclude>**/*Test.class</exclude>
                                     </excludes>
