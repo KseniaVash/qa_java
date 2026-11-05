@@ -1,4 +1,4 @@
-package com.example;
+package com.example.cat;
 
 import com.example.feline.Feline;
 

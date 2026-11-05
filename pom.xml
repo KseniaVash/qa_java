@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -9,15 +7,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- Если в системе установлена JDK 17, замените 11 на 17 -->
+        <!-- Указываем версию Java. Если тренажер требует 17, замените 11 на 17 -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
+        <!-- Версия JUnit BOM управляет версиями JUnit и Jupiter Params -->
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <mockito.version>5.11.0</mockito.version>
-        <jacoco.version>0.8.12</jacoco.version>
-        <slf4j.version>2.0.13</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -48,26 +44,24 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Интеграция Mockito и JUnit 5 -->
+        <!-- Интеграция Mockito и JUnit 5 (нужна для @ExtendWith и @Mock) -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Зависимость для логирования (Simple Binding) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
+            <version>2.0.13</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Плагин для компиляции -->
+            <!-- Плагин для компиляции под нужную версию Java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -78,7 +72,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Плагин для запуска тестов -->
+            <!-- Плагин для запуска тестов (Surefire) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -99,38 +93,40 @@
                 </dependencies>
             </plugin>
 
-            <!-- JaCoCo для покрытия кода -->
+            <!-- JaCoCo для подсчета и проверки покрытия -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
+                <version>0.8.12</version>
                 <executions>
-                    <!-- 1. Подготовка агента (собирает данные во время тестов) -->
+                    <!-- Подготовка агента до тестов -->
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <!-- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: здесь должен быть закрывающий тег -->
                     </execution>
-
-                    <!-- 2. Генерация HTML-отчета -->
+                    <!-- Генерация отчета после тестов -->
                     <execution>
                         <id>report</id>
-                        <phase>verify</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
+                    <!-- Жесткая проверка: сборка упадет, если покрытие < 100% -->
                     <execution>
                         <id>check</id>
-                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                        <phase>verify</phase>
                         <configuration>
+                            <dataFile>${project.build.directory}/jacoco.exec</dataFile>
+                            <outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
                             <rules>
                                 <rule>
                                     <element>CLASS</element>
+                                    <!-- Исключаем сами тестовые классы из проверки -->
                                     <excludes>
                                         <exclude>**/*Test.class</exclude>
                                     </excludes>
@@ -138,12 +134,12 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>1</minimum> <!-- 1.0 = 100% -->
+                                            <minimum>1</minimum> <!-- 100% строк -->
                                         </limit>
                                         <limit>
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>1</minimum> <!-- 1.0 = 100% -->
+                                            <minimum>1</minimum> <!-- 100% веток -->
                                         </limit>
                                     </limits>
                                 </rule>
