@@ -1,8 +1,8 @@
-package com.example.feline;
+package com.example;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class FelineTest {
 
     private static final Logger logger = LoggerFactory.getLogger(FelineTest.class);
-    private com.example.feline.Feline maleWithMane;
-    private com.example.feline.Feline femaleWithoutMane;
+    private com.example.Feline maleWithMane;
+    private com.example.Feline femaleWithoutMane;
 
     @BeforeEach
     void setUp() {
         logger.info("=== [SETUP] Инициализация объектов Feline для тестов ===");
-        maleWithMane = new com.example.feline.Feline("Самец", true, 5);
-        femaleWithoutMane = new com.example.feline.Feline("Самка", false, 3);
+        maleWithMane = new com.example.Feline("Самец", true, 5);
+        femaleWithoutMane = new com.example.Feline("Самка", false, 3);
     }
 
     @Test

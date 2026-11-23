@@ -1,4 +1,4 @@
-package com.example.feline;
+package com.example;
 
 public class Feline {
 

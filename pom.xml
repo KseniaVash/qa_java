@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- Если в системе установлена JDK 17, замените 11 на 17 -->
+
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -33,14 +33,14 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- JUnit 5 (Jupiter + Params для параметризации) -->
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Mockito Core -->
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -48,7 +48,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Интеграция Mockito и JUnit 5 -->
+
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
@@ -56,7 +56,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Зависимость для логирования (Simple Binding) -->
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -67,7 +67,7 @@
 
     <build>
         <plugins>
-            <!-- Плагин для компиляции -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -78,7 +78,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Плагин для запуска тестов -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -99,21 +99,21 @@
                 </dependencies>
             </plugin>
 
-            <!-- JaCoCo для покрытия кода -->
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
-                    <!-- 1. Подготовка агента (собирает данные во время тестов) -->
+
                     <execution>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <!-- КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: здесь должен быть закрывающий тег -->
+
                     </execution>
 
-                    <!-- 2. Генерация HTML-отчета -->
+
                     <execution>
                         <id>report</id>
                         <phase>verify</phase>
