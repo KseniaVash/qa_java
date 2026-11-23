@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.feline.Feline;
-
 public class Lion {
 
     private final Feline feline;

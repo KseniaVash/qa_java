@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.feline.Feline;
+import com.example.Feline;
 
 public class Cat {
     private final String name;
